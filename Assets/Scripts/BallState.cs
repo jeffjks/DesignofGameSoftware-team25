@@ -13,6 +13,7 @@ public class BallState : MonoBehaviour
     private RaycastHit m_RaycastHit;
     private float m_MaxDistance;
     private bool m_IsGround;
+    private Vector3 m_StartPos; // 시작 위치
     private Vector3 m_PreviousPos; // 이전 위치 (y좌표 3이하로 떨어지면 이전 위치로 이동)
     private float m_GoalDistance;
     private float m_UnderHeightTimer;
@@ -29,6 +30,7 @@ public class BallState : MonoBehaviour
     {
         m_GameManager = GameManager.instance_gm;
         m_MaxDistance = transform.localScale.y * 0.5f + 0.1f;
+        m_StartPos = transform.position;
         m_PreviousPos = transform.position;
     }
 

@@ -45,14 +45,18 @@ public class BallControl : MonoBehaviour
     {
         m_CameraRotation += xRot * m_CameraRotationSpeed;
         m_BallCamera.eulerAngles = new Vector3(0f, m_CameraRotation, 0f);
-        //m_BallCamera.Rotate(Vector3.up * m_CameraRotationSpeed * xRot, Space.World); Mathf.Sin(Mathf.pi*m_BallState.m_ShotPower/100) + 1
+        //m_BallCamera.Rotate(Vector3.up * m_CameraRotationSpeed * xRot, Space.World);
     }
 
     private void PerformShot()
     {
         m_BallState.m_Controlable = false;
-        Vector3 force = m_BallCamera.forward * m_BallState.m_ShotPower * 0.01f + new Vector3(0f, m_BallState.m_ShotPower*0.01f, 0f); // Sine 함수로 변경 예정
-        //Debug.Log(force);
+        float power = m_BallState.m_ShotPower;
+        float force_height = (Mathf.Sin((power - 50f)*1.8f*Mathf.Deg2Rad) + 1) * 0.5f;
+
+        Debug.Log(force_height);
+        Debug.Log(power);
+        Vector3 force = m_BallCamera.forward * power * 0.01f + new Vector3(0f, force_height, 0f);
         m_RigidBody.AddForce(force, ForceMode.Impulse);
         m_BallState.m_MinimalDelay = false;
         m_GameManager.AddTry();
