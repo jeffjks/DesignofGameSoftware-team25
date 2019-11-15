@@ -155,8 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RigidBody: {fileID: 7770059070931193950}
+  m_Goal: {fileID: 0}
   m_AirDrag: 0.05
   m_GroundDrag: 1
+  m_MinimalDelay: 0
   m_Controlable: 1
 --- !u!114 &7770059070931193948
 MonoBehaviour:
