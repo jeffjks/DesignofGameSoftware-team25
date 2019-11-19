@@ -141,7 +141,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &339852536120300236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +158,10 @@ MonoBehaviour:
   m_Goal: {fileID: 0}
   m_AirDrag: 0.05
   m_GroundDrag: 1
+  MAX_SHOT_POWER: 100
   m_MinimalDelay: 0
   m_Controlable: 1
+  m_ShotPower: 0
 --- !u!114 &7770059070931193948
 MonoBehaviour:
   m_ObjectHideFlags: 0

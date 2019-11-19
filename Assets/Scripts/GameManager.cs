@@ -8,10 +8,12 @@ public class GameManager : MonoBehaviour
 {
     public Text m_TryStateText;
     public Image m_PowerImage;
+    public RectTransform m_CompassArrow;
+    public Text m_WindSpeed;
 
-    private byte m_Stage = 0;
+    private byte m_Stage;
     private byte m_Try;
-    private byte[] m_MaxTry = {5, 3, 7};
+    private byte[] m_MaxTry = {10, 3, 7};
 
     public static GameManager instance_gm = null;
     
@@ -51,8 +53,9 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator NextStage() {
+        yield return new WaitForSeconds(3f);
         if (m_Stage < 2)
-            SceneManager.LoadScene("Stage" + (m_Stage + 1));
+            SceneManager.LoadScene("Stage" + (m_Stage + 2));
         m_Stage++;
         InitTryState();
         yield break;

@@ -53,9 +53,7 @@ public class BallControl : MonoBehaviour
         m_BallState.m_Controlable = false;
         float power = m_BallState.m_ShotPower;
         float force_height = (Mathf.Sin((power - 50f)*1.8f*Mathf.Deg2Rad) + 1) * 0.5f;
-
-        Debug.Log(force_height);
-        Debug.Log(power);
+        
         Vector3 force = m_BallCamera.forward * power * 0.01f + new Vector3(0f, force_height, 0f);
         m_RigidBody.AddForce(force, ForceMode.Impulse);
         m_BallState.m_MinimalDelay = false;
