@@ -8,6 +8,7 @@ public class BallControl : MonoBehaviour
     public Rigidbody m_RigidBody;
     public Transform m_BallCamera;
     public float m_CameraRotationSpeed;
+    public AudioSource m_AudioGolfHit;
     
     private float m_CameraRotation;
 
@@ -39,6 +40,13 @@ public class BallControl : MonoBehaviour
                 PerformShot();
             }
         }
+
+        if (m_GameManager.m_Stage == 0) {
+            m_GameManager.m_MapPlayer.anchoredPosition = new Vector2(transform.position.x*3f + 30f, - 300f + transform.position.z*3f - 30f);
+        }
+        else if (m_GameManager.m_Stage == 1) {
+            m_GameManager.m_MapPlayer.anchoredPosition = new Vector2(transform.position.x*1.8f + 30f, - 540f + transform.position.z*1.8f - 30f);
+        }
     }
     
     private void PreformCameraRotation(float xRot)
@@ -58,6 +66,9 @@ public class BallControl : MonoBehaviour
         m_RigidBody.AddForce(force, ForceMode.Impulse);
         m_BallState.m_MinimalDelay = false;
         m_GameManager.AddTry();
+        if (m_BallState.m_ShotPower > 15f)
+            m_RigidBody.angularVelocity = Random.insideUnitSphere;
+        m_AudioGolfHit.Play();
         Invoke("MinimalDelay", 1f);
     }
 

@@ -50,16 +50,21 @@ public class BallState : MonoBehaviour
             }
         }
 
-        //Debug.Log(m_RigidBody.velocity.magnitude);
         if (m_RigidBody.velocity == Vector3.zero) {
             if (m_MinimalDelay) {
                 if (!m_Controlable) {
                     if (transform.position.y >= HEIGHT_DEATH) {
-                        if (m_GameManager.CheckTry()) {
-                            m_PreviousPos = transform.position;
+                        if (!m_GameManager.m_ToNextStage) {
                             m_Controlable = true;
                             m_ShotPower = 0;
+                            m_RigidBody.angularVelocity = Vector3.zero;
                             SetWind();
+                            if (m_GameManager.CheckTry()) {
+                                m_PreviousPos = transform.position;
+                            }
+                            else {
+                                transform.position = m_StartPos;
+                            }
                         }
                     }
                 }
@@ -117,7 +122,6 @@ public class BallState : MonoBehaviour
         if (collider.gameObject.tag == "Goal") {
             if (!IsGoal) {
                 IsGoal = true;
-                Debug.Log("Goal");
                 m_GameManager.StageClear();
             }
         }
